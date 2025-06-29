@@ -1,6 +1,6 @@
 # Netflix Movies and TV Shows Data Analysis using SQL
 
-![](https://github.com/najirh/netflix_sql_project/blob/main/logo.png)
+[![](https://github.com/Ukhera/Netflix_sql_project/blob/main/logo.png)
 
 ## Overview
 This project involves a comprehensive analysis of Netflix's movies and TV shows data using SQL. The goal is to extract valuable insights and answer various business questions based on the dataset. The following README provides a detailed account of the project's objectives, business problems, solutions, findings, and conclusions.
@@ -98,7 +98,7 @@ SELECT *
 FROM
 (
     SELECT 
-        UNNEST(STRING_TO_ARRAY(country, ',')) AS country,
+        trim(UNNEST(STRING_TO_ARRAY(country, ','))) AS country,
         COUNT(*) AS total_content
     FROM netflix
     GROUP BY 1
@@ -139,7 +139,7 @@ SELECT *
 FROM (
     SELECT 
         *,
-        UNNEST(STRING_TO_ARRAY(director, ',')) AS director_name
+        trim(UNNEST(STRING_TO_ARRAY(director, ','))) AS director_name
     FROM netflix
 ) AS t
 WHERE director_name = 'Rajiv Chilaka';
@@ -162,7 +162,7 @@ WHERE type = 'TV Show'
 
 ```sql
 SELECT 
-    UNNEST(STRING_TO_ARRAY(listed_in, ',')) AS genre,
+    trim(UNNEST(STRING_TO_ARRAY(listed_in, ','))) AS genre,
     COUNT(*) AS total_content
 FROM netflix
 GROUP BY 1;
@@ -226,7 +226,7 @@ WHERE casts LIKE '%Salman Khan%'
 
 ```sql
 SELECT 
-    UNNEST(STRING_TO_ARRAY(casts, ',')) AS actor,
+    trim(UNNEST(STRING_TO_ARRAY(casts, ','))) AS actor,
     COUNT(*)
 FROM netflix
 WHERE country = 'India'
